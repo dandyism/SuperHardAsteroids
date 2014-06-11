@@ -5,12 +5,14 @@
   Game.DIM_X = 500;
   Game.DIM_Y = 500;
 
-  var Game = Asteroids.Game = function(ctx, images) {
-    var ctx = ctx;
-    var images = images;
-    var asteroids = [];
+  var Game = Asteroids.Game = function(ctx, images, bg) {
+    this.ctx = ctx;
+    this.images = images;
+    this.asteroids = [];
+    this.bg = bg;
+
     for (var i = 0; i < Game.NUM_STROIDS; i++) {
-      asteroids.push(Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, images));
+      this.asteroids.push(Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, images));
     }
-  }
+  };
 })(this);
