@@ -19,6 +19,17 @@
     ctx.restore();
   };
 
+  MovingObject.prototype.getDistance = function (otherObject) {
+    var deltaX = Math.abs(this.pos[0] - otherObject.pos[0]);
+    var deltaY = Math.abs(this.pos[1] - otherObject.pos[1]);
+
+    return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+  };
+
+  MovingObject.prototype.isCollidedWith = function (otherObject) {
+    return this.getDistance(otherObject) <= this.radius + otherObject.radius;
+  };
+
 
 
 })(this);
