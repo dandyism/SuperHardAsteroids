@@ -6,10 +6,15 @@
     this.angle = angle;
     this.speed = speed;
     this.img = img;
-    this.radius = (typeof radius === "undefined") ? this.img.width / 2 : radius;
+    this.radius = (typeof radius === "undefined") ? this.img.width / 3 : radius;
+    this.dead = false;
   }
 
   MovingObject.prototype.draw = function (ctx) {
+    if (this.dead) {
+      return;
+    }
+
     ctx.save();
 
     ctx.translate(this.pos[0], this.pos[1]);
@@ -31,6 +36,10 @@
   };
 
   MovingObject.prototype.move = function () {
+    if (this.dead) {
+      return;
+    }
+
     var x = this.pos[0];
     var y = this.pos[1];
     var speed = this.speed;
