@@ -30,6 +30,18 @@
     return this.getDistance(otherObject) <= this.radius + otherObject.radius;
   };
 
+  MovingObject.prototype.move = function () {
+    var x = this.pos[0];
+    var y = this.pos[1];
+    var speed = this.speed;
 
+    var diffX = speed * Math.cos(this.angle);
+    var diffY = speed * Math.sin(this.angle);
+
+    var newX = (x + diffX) % Asteroids.Game.DIM_X;
+    var newY = (y + diffY) % Asteroids.Game.DIM_Y;
+
+    this.pos = [newX, newY];
+  };
 
 })(this);

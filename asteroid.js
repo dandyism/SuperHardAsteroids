@@ -7,7 +7,7 @@
 
   Asteroid.inherits(Asteroids.MovingObject);
 
-  Asteroid.MAX_SPEED = 10;
+  Asteroids.Asteroid.MAX_SPEED = 10;
 
   Asteroids.randomAsteroid = function (dimX, dimY, images) {
     var numImages = images.length;
@@ -15,7 +15,7 @@
     var x = Math.floor(Math.random() * dimX);
     var y = Math.floor(Math.random() * dimY);
     var angle = Math.floor(Math.random() * 2 * Math.PI);
-    var speed = Math.floor(Math.random() * this.MAX_SPEED);
+    var speed = Math.floor(Math.random() * this.Asteroid.MAX_SPEED);
 
     return new Asteroid([x, y], angle, speed, images[index]);
   };

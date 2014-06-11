@@ -37,8 +37,19 @@
 
     this.bgFill();
 
-    for (var asteroid in this.asteroids) {
-      this.asteroids[asteroid].draw(ctx);
-    }
+    this.asteroids.forEach(function(asteroid) {
+      asteroid.draw(ctx);
+    });
+  };
+
+  Game.prototype.move = function () {
+    this.asteroids.forEach(function(asteroid) {
+      asteroid.move();
+    });
+  };
+
+  Game.prototype.step = function () {
+    this.move();
+    this.draw();
   };
 })(this);
