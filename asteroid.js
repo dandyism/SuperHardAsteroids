@@ -9,7 +9,7 @@
 
   Asteroid.MAX_SPEED = 10;
 
-  Asteroid.randomAsteroid = function (dimX, dimY, images) {
+  Asteroids.randomAsteroid = function (dimX, dimY, images) {
     var numImages = images.length;
     var index = Math.floor(Math.random() * numImages);
     var x = Math.floor(Math.random() * dimX);
