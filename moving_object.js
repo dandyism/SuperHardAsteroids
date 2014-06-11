@@ -6,7 +6,7 @@
     this.angle = angle;
     this.speed = speed;
     this.img = img;
-    this.radius = (typeof radius === "undefined") ? this.img.width : radius;
+    this.radius = (typeof radius === "undefined") ? this.img.width / 2 : radius;
   }
 
   MovingObject.prototype.draw = function (ctx) {
