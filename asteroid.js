@@ -9,15 +9,34 @@
 
   Asteroids.Asteroid.MAX_SPEED = 10;
 
-  Asteroids.randomAsteroid = function (dimX, dimY, images) {
+  Asteroids.newAngle = function(stroidPos, shipPos) {
+    var dy = stroidPos[1] - shipPos[1];
+    var dx = stroidPos[0] - shipPos[0];
+
+    return Math.atan(dy/dx)
+  };
+
+  Asteroids.newSpawnPoint = function(dimX, dimY) {
+    var x = Math.random() * dimX;
+    var y = Math.random() * dimY;
+
+    if (coinFlip()) {
+      x = coinFlip() * (dimX - 70);
+    } else {
+      y = coinFlip() * (dimY -70);
+    }
+
+    return [x, y];
+  };
+
+  Asteroids.randomAsteroid = function (dimX, dimY, images, shipPos) {
     var numImages = images.length;
     var index = Math.floor(Math.random() * numImages);
-    var x = Math.floor(Math.random() + 0.5) * dimX;
-    var y = Math.floor(Math.random() +0.5) * dimY;
-    var angle = Math.floor(Math.random() * 2 * Math.PI);
+    var spawnPoint = this.newSpawnPoint(dimX, dimY);
+    var angle = this.newAngle(spawnPoint, shipPos);
     var speed = 1 + Math.floor(Math.random() * (this.Asteroid.MAX_SPEED - 1));
 
-    return new Asteroid([x, y], angle, speed, images[index]);
+    return new Asteroid(spawnPoint, angle, speed, images[index]);
   };
 
 })(this);

@@ -14,7 +14,7 @@
   Ship.MAX_SPEED = 20;
 
   Ship.prototype.power = function (impulse) {
-    if(Math.abs(this.speed + impulse <= Ship.MAX_SPEED)) {
+    if(Math.abs(this.speed + impulse) <= Ship.MAX_SPEED) {
       this.speed += impulse;
     }
   };

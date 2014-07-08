@@ -1,7 +1,7 @@
 (function(root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Game = Asteroids.Game = function(ctx, bulletImage, shipImage, images, bg) {
+  var Game = Asteroids.Game = function(ctx, bulletImage, shipImage, images, bg)   {
     this.ctx = ctx;
     this.images = images;
     this.asteroids = [];
@@ -12,7 +12,7 @@
 
     for (var i = 0; i < Game.NUM_STROIDS; i++) {
       this.asteroids.push(
-        Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, images)
+        Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, images, this.ship.pos)
       );
     }
 
@@ -38,14 +38,23 @@
     }
   };
 
-  Game.prototype.drawText = function() {
+  Game.prototype.textSettings = function() {
       this.ctx.fillStyle = "white";
       this.ctx.font = "24pt Helvetica";
-      this.ctx.fillText("Score: " + this.counter, 200, 150);
+      this.ctx.textAlign = "center";
   }
+
+  Game.prototype.drawScore = function () {
+    this.ctx.fillText("Score: " + this.counter, Game.DIM_X / 2, 200);
+  };
+
+  Game.prototype.drawGameOver = function () {
+    this.ctx.fillText("GAME OVER", Game.DIM_X / 2, Game.DIM_Y / 2);
+  };
 
   Game.prototype.draw = function () {
     var ctx = this.ctx;
+    this.textSettings();
 
     this.bgFill();
 
@@ -58,7 +67,7 @@
     });
     this.ship.draw(ctx);
 
-    this.drawText();
+    this.drawScore();
   };
 
   Game.prototype.outOfBounds = function (object) {
@@ -66,17 +75,25 @@
             object.pos[1] >= Game.DIM_Y - object.speed);
   };
 
+  Game.prototype.removeAsteroid = function (asteroid) {
+    this.asteroids = _.without(this.asteroids, asteroid);
+    this.spawn();
+  };
+
   Game.prototype.move = function () {
     var game = this;
 
     this.asteroids.forEach(function(asteroid) {
       asteroid.move();
+      if (game.outOfBounds(asteroid)) {
+        game.removeAsteroid(asteroid);
+      }
     });
 
     this.bullets.forEach(function(bullet) {
       bullet.move();
       if (game.outOfBounds(bullet)) {
-      game.bullets =  _.without(game.bullets, bullet);
+        game.bullets = _.without(game.bullets, bullet);
       }
     });
 
@@ -86,19 +103,15 @@
   Game.prototype.step = function () {
     var key = root.key;
     // if (key.isPressed("up")) {
-//       this.ship.power(2);
-//     } else if (key.isPressed("down")) {
-//       this.ship.power(-1);
-//     }
+    //   this.ship.power(2);
+    // } else if (key.isPressed("down")) {
+    //   this.ship.power(-1);
+    // }
 
     if (key.isPressed("left")) {
       this.ship.turn(-0.1);
     } else if (key.isPressed("right")) {
       this.ship.turn(0.1);
-    }
-
-    if (key.isPressed("space")) {
-      this.fire();
     }
 
     this.move();
@@ -107,6 +120,7 @@
   };
 
   Game.prototype.start = function () {
+    key('space', this.fire.bind(this));
     this.intervalID = setInterval(this.step.bind(this), 1000 / Game.FPS)
   };
 
@@ -121,20 +135,20 @@
       game.bullets.forEach(function(bullet) {
         if (asteroid.isCollidedWith(bullet)) {
           game.bullets = _.without(game.bullets, bullet);
-          game.asteroids = _.without(game.asteroids, asteroid);
+          game.removeAsteroid(asteroid);
           game.counter += 1;
-          game.spawn();
         }
       })
     });
   };
 
   Game.prototype.spawn = function () {
-    this.asteroids.push(Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, this.images));
+    this.asteroids.push(Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, this.images, this.ship.pos));
   };
 
   Game.prototype.stop = function () {
     clearInterval(this.intervalID);
+    this.drawGameOver();
   };
 
   Game.prototype.fire = function () {
