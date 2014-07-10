@@ -7,3 +7,5 @@ An incredibly difficult game of asteroids, built with Javascript.
 
 1. Asteroids break down as you shoot them.
 2. Add toggle between SuperHard and NotSoSuperHard 
+
+Collaborated with [GriffinMB](https://github.com/GriffinMB)
