@@ -25,6 +25,6 @@
   };
 
   Ship.prototype.fire = function () {
-    return new Asteroids.Bullet(this.pos, this.angle, 70, this.bulletImage);
+    return new Asteroids.Bullet(this.pos, this.angle, 20, this.bulletImage);
   };
 })(this);
