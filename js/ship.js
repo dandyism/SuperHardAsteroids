@@ -11,12 +11,12 @@
 
   Ship.inherits(Asteroids.MovingObject);
 
-  Ship.MAX_SPEED = 20;
+  Ship.MAX_SPEED = 10;
 
   Ship.prototype.power = function (impulse) {
-    if(Math.abs(this.speed + impulse) <= Ship.MAX_SPEED) {
-      this.speed += impulse;
-    }
+     this.speed += impulse;
+     this.speed = (this.speed >= 0) ? this.speed : 0; 
+     this.speed = (this.speed <= Ship.MAX_SPEED) ? this.speed : Ship.MAX_SPEED;
   };
 
   Ship.prototype.turn = function (radians) {
@@ -25,6 +25,6 @@
   };
 
   Ship.prototype.fire = function () {
-    return new Asteroids.Bullet(this.pos, this.angle, 20, this.bulletImage);
+    return new Asteroids.Bullet(this.pos, this.angle, this.speed + Ship.MAX_SPEED, this.bulletImage);
   };
 })(this);

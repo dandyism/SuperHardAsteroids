@@ -92,6 +92,7 @@
 
     this.bullets.forEach(function(bullet) {
       bullet.move();
+
       if (game.outOfBounds(bullet)) {
         game.bullets = _.without(game.bullets, bullet);
       }
@@ -102,11 +103,11 @@
 
   Game.prototype.step = function () {
     var key = root.key;
-    // if (key.isPressed("up")) {
-    //   this.ship.power(2);
-    // } else if (key.isPressed("down")) {
-    //   this.ship.power(-1);
-    // }
+    if (key.isPressed("up")) {
+      this.ship.power(2);
+    } else if (key.isPressed("down")) {
+      this.ship.power(-1);
+    }
 
     if (key.isPressed("left")) {
       this.ship.turn(-0.1);
