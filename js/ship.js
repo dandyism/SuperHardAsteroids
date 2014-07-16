@@ -5,13 +5,16 @@
     var x = Asteroids.Game.DIM_X / 2;
     var y = Asteroids.Game.DIM_Y / 2;
     this.bulletImage = bulletImage;
+    this.cooldown = 0;
 
     Asteroids.MovingObject.call(this, [x,y], 0, 0, image);
   };
 
   Ship.inherits(Asteroids.MovingObject);
 
-  Ship.MAX_SPEED = 10;
+  Ship.MAX_SPEED      = 10;
+  Ship.COOLDOWN       = 100;
+  Ship.COOL_PER_TICK  = 20;
 
   Ship.prototype.power = function (impulse) {
      this.speed += impulse;
@@ -25,6 +28,18 @@
   };
 
   Ship.prototype.fire = function () {
-    return new Asteroids.Bullet(this.pos, this.angle, this.speed + Ship.MAX_SPEED, this.bulletImage);
+    if (this.cooldown === 0) {
+      this.cooldown = Ship.COOLDOWN;
+      return new Asteroids.Bullet(this.pos, this.angle, this.speed + Ship.MAX_SPEED, this.bulletImage);
+    }
+
+    return null;
+  };
+
+  Ship.prototype.move = function() {
+    this.cooldown -= Ship.COOL_PER_TICK;
+    this.cooldown = (this.cooldown >= 0) ? this.cooldown : 0;
+
+    Asteroids.MovingObject.prototype.move.apply(this);
   };
 })(this);

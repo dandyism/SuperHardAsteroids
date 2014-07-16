@@ -153,6 +153,10 @@
   };
 
   Game.prototype.fire = function () {
-    this.bullets.push(this.ship.fire());
+    var bullet = this.ship.fire();
+    
+    if (bullet) { 
+      this.bullets.push(bullet);
+    }
   };
 })(this);
