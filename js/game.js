@@ -19,7 +19,7 @@
     ctx.translate(-100, -100)
   };
 
-  Game.NUM_STROIDS = 5;
+  Game.NUM_STROIDS = 30;
   Game.DIM_X = 700;
   Game.DIM_Y = 700;
   Game.FPS = 24;
