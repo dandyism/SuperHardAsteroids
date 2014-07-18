@@ -41,5 +41,8 @@
     this.cooldown = (this.cooldown >= 0) ? this.cooldown : 0;
 
     Asteroids.MovingObject.prototype.move.apply(this);
+
+    this.x %= Asteroids.Game.DIM_X;
+    this.y %= Asteroids.Game.DIM_Y;
   };
 })(this);
