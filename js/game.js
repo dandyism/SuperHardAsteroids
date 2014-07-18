@@ -19,7 +19,7 @@
     ctx.translate(-100, -100)
   };
 
-  Game.NUM_STROIDS = 5;
+  Game.NUM_STROIDS = 30;
   Game.DIM_X = 700;
   Game.DIM_Y = 700;
   Game.FPS = 24;
@@ -92,6 +92,7 @@
 
     this.bullets.forEach(function(bullet) {
       bullet.move();
+
       if (game.outOfBounds(bullet)) {
         game.bullets = _.without(game.bullets, bullet);
       }
@@ -102,11 +103,11 @@
 
   Game.prototype.step = function () {
     var key = root.key;
-    // if (key.isPressed("up")) {
-    //   this.ship.power(2);
-    // } else if (key.isPressed("down")) {
-    //   this.ship.power(-1);
-    // }
+    if (key.isPressed("up")) {
+      this.ship.power(2);
+    } else if (key.isPressed("down")) {
+      this.ship.power(-1);
+    }
 
     if (key.isPressed("left")) {
       this.ship.turn(-0.1);
@@ -152,6 +153,10 @@
   };
 
   Game.prototype.fire = function () {
-    this.bullets.push(this.ship.fire());
+    var bullet = this.ship.fire();
+    
+    if (bullet) { 
+      this.bullets.push(bullet);
+    }
   };
 })(this);

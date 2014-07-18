@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>'STROIDS</h1>
-  <canvas width="500" height="500"></canvas>
+  <canvas contenteditable="true" width="500" height="500"></canvas>
 
   <script src="js/underscore.js"></script>
   <script src="js/keymaster.js"></script>
@@ -20,6 +20,9 @@
   <script src="js/ship.js"></script>
   <script src="js/game.js"></script>
   <script>
+  var canvas = document.getElementsByTagName("canvas")[0];
+  canvas.focus();
+  
   var imagePreloader = new Preloader.ImagePreloader({
     bullet: "assets/images/laser.png",
     ship:   "assets/images/ship.png",
@@ -27,12 +30,10 @@
     m2:     "assets/images/m2.png",
     bg:     "assets/images/darkPurple.png"
   }, function(images) {
-      var canvas = document.getElementsByTagName("canvas")[0];
       var ctx = canvas.getContext('2d');
       var game = new Asteroids.Game(ctx, images.bullet, images.ship, [images.m1, images.m2], images.bg);
       game.start();
   });
-
   </script>
 </body>
 </html>

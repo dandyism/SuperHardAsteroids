@@ -13,4 +13,5 @@ h1 em {
 canvas {
   display: block;
   margin: 0 auto;
+  outline: 0;
 }
