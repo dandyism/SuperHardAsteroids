@@ -4,7 +4,10 @@
   var MovingObject = Asteroids.MovingObject = function (pos, angle, speed, img, radius) {
     this.pos = pos;
     this.angle = angle;
-    this.speed = speed;
+    this.vector = {
+      x: speed * Math.cos(this.angle),
+      y: speed * Math.sin(this.angle)
+    }
     this.img = img;
     this.radius = (typeof radius === "undefined") ? this.img.width / 3 : radius;
     this.dead = false;
@@ -22,6 +25,10 @@
     ctx.drawImage(this.img, 0 - this.img.width / 2, 0 - this.img.height / 2);
 
     ctx.restore();
+  };
+
+  MovingObject.prototype.speed = function() {
+    return this.vector.x / Math.cos(this.angle);
   };
 
   MovingObject.prototype.getDistance = function (otherObject) {
@@ -42,13 +49,9 @@
 
     var x = this.pos[0];
     var y = this.pos[1];
-    var speed = this.speed;
 
-    var diffX = speed * Math.cos(this.angle);
-    var diffY = speed * Math.sin(this.angle);
-
-    var newX = (x + diffX) % Asteroids.Game.DIM_X;
-    var newY = (y + diffY) % Asteroids.Game.DIM_Y;
+    var newX = (x + this.vector.x) % Asteroids.Game.DIM_X;
+    var newY = (y + this.vector.y) % Asteroids.Game.DIM_Y;
 
     this.pos = [newX, newY];
   };

@@ -104,9 +104,9 @@
   Game.prototype.step = function () {
     var key = root.key;
     if (key.isPressed("up")) {
-      this.ship.power(2);
+      this.ship.power(0.1);
     } else if (key.isPressed("down")) {
-      this.ship.power(-1);
+      this.ship.power(-0.1);
     }
 
     if (key.isPressed("left")) {

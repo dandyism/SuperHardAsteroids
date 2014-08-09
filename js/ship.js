@@ -17,9 +17,8 @@
   Ship.COOL_PER_TICK  = 20;
 
   Ship.prototype.power = function (impulse) {
-     this.speed += impulse;
-     this.speed = (this.speed >= 0) ? this.speed : 0; 
-     this.speed = (this.speed <= Ship.MAX_SPEED) ? this.speed : Ship.MAX_SPEED;
+     this.vector.x += impulse * Math.cos(this.angle);
+     this.vector.y += impulse * Math.sin(this.angle);
   };
 
   Ship.prototype.turn = function (radians) {
@@ -30,7 +29,7 @@
   Ship.prototype.fire = function () {
     if (this.cooldown === 0) {
       this.cooldown = Ship.COOLDOWN;
-      return new Asteroids.Bullet(this.pos, this.angle, this.speed + Ship.MAX_SPEED, this.bulletImage);
+      return new Asteroids.Bullet(this.pos, this.angle, this.speed() + Ship.MAX_SPEED, this.bulletImage);
     }
 
     return null;
