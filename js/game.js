@@ -15,13 +15,11 @@
         Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, images, this.ship.pos)
       );
     }
-
-    ctx.translate(-100, -100)
   };
 
   Game.NUM_STROIDS = 10;
-  Game.DIM_X = 700;
-  Game.DIM_Y = 700;
+  Game.DIM_X = 500;
+  Game.DIM_Y = 500;
   Game.FPS = 24;
 
   Game.prototype.bgFill = function () {

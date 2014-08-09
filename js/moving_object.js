@@ -50,11 +50,11 @@
     var x = this.pos[0];
     var y = this.pos[1];
 
-    var newX = (x + this.vector.x) % Asteroids.Game.DIM_X;
-    var newY = (y + this.vector.y) % Asteroids.Game.DIM_Y;
+    var newX = (x + this.vector.x) % (Asteroids.Game.DIM_X + this.radius);
+    var newY = (y + this.vector.y) % (Asteroids.Game.DIM_Y + this.radius);
 
-    newX = (newX > 0) ? newX : Asteroids.Game.DIM_X;
-    newY = (newY > 0) ? newY : Asteroids.Game.DIM_Y;
+    newX = (newX > -this.radius) ? newX : Asteroids.Game.DIM_X;
+    newY = (newY > -this.radius) ? newY : Asteroids.Game.DIM_Y;
 
     this.pos = [newX, newY];
   };
