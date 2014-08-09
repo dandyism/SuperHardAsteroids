@@ -53,6 +53,9 @@
     var newX = (x + this.vector.x) % Asteroids.Game.DIM_X;
     var newY = (y + this.vector.y) % Asteroids.Game.DIM_Y;
 
+    newX = (newX > 0) ? newX : Asteroids.Game.DIM_X;
+    newY = (newY > 0) ? newY : Asteroids.Game.DIM_Y;
+
     this.pos = [newX, newY];
   };
 
