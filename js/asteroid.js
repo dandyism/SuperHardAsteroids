@@ -7,7 +7,7 @@
 
   Asteroid.inherits(Asteroids.MovingObject);
 
-  Asteroids.Asteroid.MAX_SPEED = 10;
+  Asteroids.Asteroid.MAX_SPEED = 4;
 
   Asteroids.newAngle = function(stroidPos, shipPos) {
     var dy = stroidPos[1] - shipPos[1];
