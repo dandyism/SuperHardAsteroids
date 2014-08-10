@@ -15,7 +15,7 @@
 
     if (dy > 0 && dx < 0) {
       return 5 + ((Math.random() * 2) - 1)
-    } else if (dy < 0 && dx < 0){
+    } else if (dy < 0 && dx < 0) {
       return 6 + ((Math.random() * 2) - 1)
     } else if (dy > 0 && dx > 0) {
       return 3 + ((Math.random() * 2) - 1)
