@@ -22,8 +22,6 @@
     } else if (dy < 0 && dx > 0) {
       return 2 + ((Math.random() * 2) - 1)
     }
-    // Uncomment for super-hard
-    // console.log(Math.atan(dy/dx))
   };
 
   Asteroids.newSpawnPoint = function(dimX, dimY) {
