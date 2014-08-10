@@ -15,3 +15,7 @@ canvas {
   margin: 0 auto;
   outline: 0;
 }
+
+.instructions {
+  text-align: center;
+}

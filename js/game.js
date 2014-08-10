@@ -101,15 +101,15 @@
 
   Game.prototype.step = function () {
     var key = root.key;
-    if (key.isPressed("up")) {
+    if (key.isPressed("w")) {
       this.ship.power(0.1);
-    } else if (key.isPressed("down")) {
+    } else if (key.isPressed("s")) {
       this.ship.power(-0.1);
     }
 
-    if (key.isPressed("left")) {
+    if (key.isPressed("a")) {
       this.ship.turn(-0.1);
-    } else if (key.isPressed("right")) {
+    } else if (key.isPressed("d")) {
       this.ship.turn(0.1);
     }
 
@@ -119,7 +119,7 @@
   };
 
   Game.prototype.start = function () {
-    key('space', this.fire.bind(this));
+    key('n', this.fire.bind(this));
     this.intervalID = setInterval(this.step.bind(this), 1000 / Game.FPS)
   };
 
