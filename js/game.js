@@ -69,8 +69,10 @@
   };
 
   Game.prototype.outOfBounds = function (object) {
-    return (object.pos[0] >= Game.DIM_X - object.speed ||
-            object.pos[1] >= Game.DIM_Y - object.speed);
+    return (object.pos[0] >= Game.DIM_X ||
+            object.pos[1] >= Game.DIM_Y ||
+            object.pos[0] <= 0 ||
+            object.pos[1] <= 0);
   };
 
   Game.prototype.removeAsteroid = function (asteroid) {
@@ -83,6 +85,7 @@
 
     this.asteroids.forEach(function(asteroid) {
       asteroid.move();
+
       if (game.outOfBounds(asteroid)) {
         game.removeAsteroid(asteroid);
       }
