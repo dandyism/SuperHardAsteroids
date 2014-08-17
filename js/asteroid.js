@@ -7,7 +7,7 @@
 
   Asteroid.inherits(Asteroids.MovingObject);
 
-  Asteroids.Asteroid.MAX_SPEED = 10;
+  Asteroids.Asteroid.MAX_SPEED = 4;
 
   Asteroids.newAngle = function(stroidPos, shipPos) {
     var dy = stroidPos[1] - shipPos[1];
@@ -15,15 +15,13 @@
 
     if (dy > 0 && dx < 0) {
       return 5 + ((Math.random() * 2) - 1)
-    } else if (dy < 0 && dx < 0){
+    } else if (dy < 0 && dx < 0) {
       return 6 + ((Math.random() * 2) - 1)
     } else if (dy > 0 && dx > 0) {
       return 3 + ((Math.random() * 2) - 1)
     } else if (dy < 0 && dx > 0) {
       return 2 + ((Math.random() * 2) - 1)
     }
-    // Uncomment for super-hard
-    // console.log(Math.atan(dy/dx))
   };
 
   Asteroids.newSpawnPoint = function(dimX, dimY) {

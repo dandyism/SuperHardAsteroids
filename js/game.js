@@ -15,13 +15,11 @@
         Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, images, this.ship.pos)
       );
     }
-
-    ctx.translate(-100, -100)
   };
 
-  Game.NUM_STROIDS = 30;
-  Game.DIM_X = 700;
-  Game.DIM_Y = 700;
+  Game.NUM_STROIDS = 10;
+  Game.DIM_X = 500;
+  Game.DIM_Y = 500;
   Game.FPS = 24;
 
   Game.prototype.bgFill = function () {
@@ -71,8 +69,10 @@
   };
 
   Game.prototype.outOfBounds = function (object) {
-    return (object.pos[0] >= Game.DIM_X - object.speed ||
-            object.pos[1] >= Game.DIM_Y - object.speed);
+    return (object.pos[0] >= Game.DIM_X ||
+            object.pos[1] >= Game.DIM_Y ||
+            object.pos[0] <= 0 ||
+            object.pos[1] <= 0);
   };
 
   Game.prototype.removeAsteroid = function (asteroid) {
@@ -85,6 +85,7 @@
 
     this.asteroids.forEach(function(asteroid) {
       asteroid.move();
+
       if (game.outOfBounds(asteroid)) {
         game.removeAsteroid(asteroid);
       }
@@ -103,15 +104,15 @@
 
   Game.prototype.step = function () {
     var key = root.key;
-    if (key.isPressed("up")) {
-      this.ship.power(2);
-    } else if (key.isPressed("down")) {
-      this.ship.power(-1);
+    if (key.isPressed("w")) {
+      this.ship.power(0.1);
+    } else if (key.isPressed("s")) {
+      this.ship.power(-0.1);
     }
 
-    if (key.isPressed("left")) {
+    if (key.isPressed("a")) {
       this.ship.turn(-0.1);
-    } else if (key.isPressed("right")) {
+    } else if (key.isPressed("d")) {
       this.ship.turn(0.1);
     }
 
@@ -121,7 +122,7 @@
   };
 
   Game.prototype.start = function () {
-    key('space', this.fire.bind(this));
+    key('n', this.fire.bind(this));
     this.intervalID = setInterval(this.step.bind(this), 1000 / Game.FPS)
   };
 

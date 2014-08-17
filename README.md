@@ -1,5 +1,5 @@
-SuperHardAsteroids
-==================
+Asteroids
+=========
 
 An incredibly difficult game of asteroids, built with Javascript.
 
