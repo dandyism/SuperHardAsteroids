@@ -14,15 +14,13 @@
   }
 
   MovingObject.prototype.draw = function (ctx) {
-    if (this.dead) {
-      return;
-    }
-
+    var realWidth = this.img.width * this.scale;
+    var realHeight = this.img.height * this.scale;
     ctx.save();
 
     ctx.translate(this.pos[0], this.pos[1]);
     ctx.rotate(this.angle);
-    ctx.drawImage(this.img, 0 - this.img.width / 2, 0 - this.img.height / 2, this.img.width * this.scale, this.img.height * this.scale);
+    ctx.drawImage(this.img, 0 - realWidth / 2, 0 - realHeight / 2, realWidth, realHeight);
 
     ctx.restore();
   };
