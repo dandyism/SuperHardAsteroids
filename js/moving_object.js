@@ -10,7 +10,7 @@
     }
     this.img = img;
     this.radius = (typeof radius === "undefined") ? this.img.width / 3 : radius;
-    this.dead = false;
+    this.scale = 1;
   }
 
   MovingObject.prototype.draw = function (ctx) {
@@ -22,7 +22,7 @@
 
     ctx.translate(this.pos[0], this.pos[1]);
     ctx.rotate(this.angle);
-    ctx.drawImage(this.img, 0 - this.img.width / 2, 0 - this.img.height / 2);
+    ctx.drawImage(this.img, 0 - this.img.width / 2, 0 - this.img.height / 2, this.img.width * this.scale, this.img.height * this.scale);
 
     ctx.restore();
   };

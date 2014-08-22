@@ -1,21 +1,30 @@
 (function(root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Asteroid = Asteroids.Asteroid = function(pos, angle, speed, image, splitsLeft) {
-    if (splitsLeft === undefined)  this.splitsLeft = Math.floor(Math.random() * Asteroids.Asteroid.MAX_SPLITS);
+  var Asteroid = Asteroids.Asteroid = function(pos, angle, speed, image, mass) {
     Asteroids.MovingObject.call(this, pos, angle, speed, image);
+
+    if (mass === undefined) { 
+      this.mass = rand(Asteroids.Asteroid.MIN_MASS, Asteroids.Asteroid.MAX_MASS);
+    } else {
+      this.mass = mass;
+    }
+
+    this.scale = this.mass / Asteroids.Asteroid.MAX_MASS;
+    this.radius *= this.scale;
   }
 
   Asteroid.inherits(Asteroids.MovingObject);
 
   Asteroids.Asteroid.MAX_SPEED = 4;
-  Asteroids.Asteroid.MAX_SPLITS = 3;
+  Asteroids.Asteroid.MAX_MASS = 100;
+  Asteroids.Asteroid.MIN_MASS = 50;
   
   Asteroid.prototype.split = function() {
-    if (this.splitsLeft > 0) { 
+    if (this.mass > Asteroids.Asteroid.MIN_MASS) { 
       return [
-        new Asteroid(this.pos, Asteroids.randomAngle(), this.speed(), this.img, this.splitsLeft - 1),
-        new Asteroid(this.pos, Asteroids.randomAngle(), this.speed(), this.img, this.splitsLeft - 1)
+        new Asteroid(this.pos, Asteroids.randomAngle(), this.speed(), this.img, this.mass / 2),
+        new Asteroid(this.pos, Asteroids.randomAngle(), this.speed(), this.img, this.mass / 2)
       ];
     }
 
