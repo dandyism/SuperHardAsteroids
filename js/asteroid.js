@@ -18,7 +18,7 @@
 
   Asteroids.Asteroid.MAX_SPEED = 4;
   Asteroids.Asteroid.MAX_MASS = 100;
-  Asteroids.Asteroid.MIN_MASS = 50;
+  Asteroids.Asteroid.MIN_MASS = 25;
   
   Asteroid.prototype.split = function() {
     if (this.mass > Asteroids.Asteroid.MIN_MASS) { 
