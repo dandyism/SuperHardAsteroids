@@ -38,7 +38,7 @@
 
   Game.prototype.textSettings = function() {
       this.ctx.fillStyle = "white";
-      this.ctx.font = "16px monospace";
+      this.ctx.font = "16px 'KenVector Future'";
   }
 
   Game.prototype.drawScore = function () {
