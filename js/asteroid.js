@@ -1,9 +1,7 @@
 (function(root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Asteroid = Asteroids.Asteroid = function(pos, angle, speed, image) {
-    Asteroids.MovingObject.call(this, pos, angle, speed, image);
-  }
+  var Asteroid = Asteroids.Asteroid = Asteroids.MovingObject;
 
   Asteroid.inherits(Asteroids.MovingObject);
 
