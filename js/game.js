@@ -38,12 +38,16 @@
 
   Game.prototype.textSettings = function() {
       this.ctx.fillStyle = "white";
-      this.ctx.font = "24pt Helvetica";
-      this.ctx.textAlign = "center";
+      this.ctx.font = "16px monospace";
   }
 
   Game.prototype.drawScore = function () {
-    this.ctx.fillText("Score: " + this.counter, Game.DIM_X / 2, 200);
+    var scoreString = this.counter.toString();
+    while (scoreString.length < 10) {
+      scoreString = "0" + scoreString;
+    }
+
+    this.ctx.fillText(scoreString, Game.DIM_X - this.ctx.measureText(scoreString).width - 10, 26);
   };
 
   Game.prototype.drawGameOver = function () {
