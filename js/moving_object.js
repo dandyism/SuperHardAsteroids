@@ -10,19 +10,17 @@
     }
     this.img = img;
     this.radius = (typeof radius === "undefined") ? this.img.width / 3 : radius;
-    this.dead = false;
+    this.scale = 1;
   }
 
   MovingObject.prototype.draw = function (ctx) {
-    if (this.dead) {
-      return;
-    }
-
+    var realWidth = this.img.width * this.scale;
+    var realHeight = this.img.height * this.scale;
     ctx.save();
 
     ctx.translate(this.pos[0], this.pos[1]);
     ctx.rotate(this.angle);
-    ctx.drawImage(this.img, 0 - this.img.width / 2, 0 - this.img.height / 2);
+    ctx.drawImage(this.img, 0 - realWidth / 2, 0 - realHeight / 2, realWidth, realHeight);
 
     ctx.restore();
   };

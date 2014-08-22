@@ -1,5 +1,10 @@
+@font-face {
+  font-family: "KenVector Future";
+  src: url(../assets/fonts/kenvector_future.ttf);
+}
+
 h1 {
-  font-family: sans-serif;
+  font-family: sans-serif; 
   font-size: 4em;
   color: black;
   text-align: center;

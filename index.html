@@ -25,14 +25,16 @@
   canvas.focus();
   
   var imagePreloader = new Preloader.ImagePreloader({
-    bullet: "assets/images/laser.png",
-    ship:   "assets/images/ship.png",
-    m1:     "assets/images/m1.png",
-    m2:     "assets/images/m2.png",
-    bg:     "assets/images/darkPurple.png"
+    bullet:   "assets/images/laser.png",
+    ship:     "assets/images/ship.png",
+    meteor1:  "assets/images/meteorGrey_big1.png",
+    meteor2:  "assets/images/meteorGrey_big2.png",
+    meteor3:  "assets/images/meteorGrey_big3.png",
+    meteor4:  "assets/images/meteorGrey_big4.png",
+    bg:       "assets/images/darkPurple.png"
   }, function(images) {
       var ctx = canvas.getContext('2d');
-      var game = new Asteroids.Game(ctx, images.bullet, images.ship, [images.m1, images.m2], images.bg);
+      var game = new Asteroids.Game(ctx, images.bullet, images.ship, [images.meteor1, images.meteor2, images.meteor3, images.meteor4], images.bg);
       game.start();
   });
   </script>
