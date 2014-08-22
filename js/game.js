@@ -77,7 +77,6 @@
 
   Game.prototype.removeAsteroid = function (asteroid) {
     this.asteroids = _.without(this.asteroids, asteroid);
-    this.spawn();
   };
 
   Game.prototype.move = function () {
@@ -146,6 +145,9 @@
     });
 
     hitAsteroids.forEach(function(asteroid) {
+      var newAsteroids = asteroid.split();
+      game.asteroids.push.apply(game.asteroids, newAsteroids);
+
       game.removeAsteroid(asteroid);
     });
 

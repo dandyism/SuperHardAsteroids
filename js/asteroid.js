@@ -1,11 +1,26 @@
 (function(root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Asteroid = Asteroids.Asteroid = Asteroids.MovingObject;
+  var Asteroid = Asteroids.Asteroid = function(pos, angle, speed, image, splitsLeft) {
+    if (splitsLeft === undefined)  this.splitsLeft = Math.floor(Math.random() * Asteroids.Asteroid.MAX_SPLITS);
+    Asteroids.MovingObject.call(this, pos, angle, speed, image);
+  }
 
   Asteroid.inherits(Asteroids.MovingObject);
 
   Asteroids.Asteroid.MAX_SPEED = 4;
+  Asteroids.Asteroid.MAX_SPLITS = 3;
+  
+  Asteroid.prototype.split = function() {
+    if (this.splitsLeft > 0) { 
+      return [
+        new Asteroid(this.pos, Asteroids.randomAngle(), this.speed(), this.img, this.splitsLeft - 1),
+        new Asteroid(this.pos, Asteroids.randomAngle(), this.speed(), this.img, this.splitsLeft - 1)
+      ];
+    }
+
+    return [];
+  };
 
   Asteroids.newAngle = function(stroidPos, shipPos) {
     var dy = stroidPos[1] - shipPos[1];
@@ -21,6 +36,10 @@
       return 2 + ((Math.random() * 2) - 1)
     }
   };
+
+  Asteroids.randomAngle = function() {
+    return Math.random() * (2 * Math.PI);
+  }
 
   Asteroids.newSpawnPoint = function(dimX, dimY) {
     var x = Math.random() * dimX;
