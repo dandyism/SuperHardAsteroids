@@ -128,6 +128,8 @@
 
   Game.prototype.checkCollisions = function () {
     var game = this;
+    var hitAsteroids = [];
+    var hitBullets = [];
 
     this.asteroids.forEach(function(asteroid) {
       if (game.ship.isCollidedWith(asteroid)) {
@@ -136,12 +138,18 @@
 
       game.bullets.forEach(function(bullet) {
         if (asteroid.isCollidedWith(bullet)) {
-          game.bullets = _.without(game.bullets, bullet);
-          game.removeAsteroid(asteroid);
+          hitAsteroids.push(asteroid);
+          hitBullets.push(bullet);
           game.counter += 1;
         }
       })
     });
+
+    hitAsteroids.forEach(function(asteroid) {
+      game.removeAsteroid(asteroid);
+    });
+
+    game.bullets = _.difference(game.bullets, hitBullets);
   };
 
   Game.prototype.spawn = function () {
