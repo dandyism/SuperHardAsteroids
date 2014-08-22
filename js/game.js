@@ -10,17 +10,21 @@
     this.bullets = [];
     this.counter = 0;
 
-    for (var i = 0; i < Game.NUM_STROIDS; i++) {
-      this.asteroids.push(
-        Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, images, this.ship.pos)
-      );
-    }
+    setInterval(this.refillAsteroids.bind(this), 2000);
   };
 
   Game.NUM_STROIDS = 10;
   Game.DIM_X = 500;
   Game.DIM_Y = 500;
   Game.FPS = 24;
+
+  Game.prototype.refillAsteroids = function() {
+    while (this.asteroids.length < Game.NUM_STROIDS) {
+      this.asteroids.push(
+        Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, this.images, this.ship.pos)
+      );
+    }
+  };
 
   Game.prototype.bgFill = function () {
     var bg = this.bg;

@@ -55,9 +55,9 @@
     var y = Math.random() * dimY;
 
     if (coinFlip()) {
-      x = coinFlip() * (dimX - 70);
+      x = coinFlip() * dimX;
     } else {
-      y = coinFlip() * (dimY -70);
+      y = coinFlip() * dimY;
     }
 
     return [x, y];
