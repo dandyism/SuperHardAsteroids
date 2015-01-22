@@ -4,13 +4,9 @@
   var Game = Asteroids.Game = function(ctx, bulletImage, shipImage, images, bg)   {
     this.ctx = ctx;
     this.images = images;
-    this.asteroids = [];
     this.bg = bg;
-    this.ship = new Asteroids.Ship(shipImage, bulletImage);
-    this.bullets = [];
-    this.counter = 0;
-
-    setInterval(this.refillAsteroids.bind(this), 2000);
+    this.shipImage = shipImage;
+    this.bulletImage = bulletImage;
   };
 
   Game.NUM_STROIDS = 10;
@@ -18,13 +14,12 @@
   Game.DIM_Y = 500;
   Game.FPS = 24;
 
-  Game.prototype.refillAsteroids = function() {
-    while (this.asteroids.length < Game.NUM_STROIDS) {
-      this.asteroids.push(
-        Asteroids.randomAsteroid(Game.DIM_X, Game.DIM_Y, this.images, this.ship.pos)
-      );
+  Game.prototype.addAsteroid = function() {
+    if (this.asteroids.length < Game.NUM_STROIDS) {
+      this.spawn();
     }
   };
+  
 
   Game.prototype.bgFill = function () {
     var bg = this.bg;
@@ -126,9 +121,16 @@
     this.move();
     this.draw();
     this.checkCollisions();
+    this.addAsteroid();
   };
 
   Game.prototype.start = function () {
+    this.ship = new Asteroids.Ship(this.shipImage, this.bulletImage);
+    this.bullets = [];
+    this.asteroids = [];
+    this.counter = 0;
+
+    key.unbind('r');
     key('n', this.fire.bind(this));
     this.intervalID = setInterval(this.step.bind(this), 1000 / Game.FPS)
   };
@@ -167,8 +169,15 @@
   };
 
   Game.prototype.stop = function () {
-    clearInterval(this.intervalID);
-    this.drawGameOver();
+    var game = this;
+
+    clearInterval(game.intervalID);
+    game.drawGameOver();
+
+    key.unbind('n');
+    key('r', function (event, handler) {
+      game.start();
+    });
   };
 
   Game.prototype.fire = function () {
