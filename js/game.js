@@ -37,6 +37,7 @@
 
   Game.prototype.textSettings = function() {
       this.ctx.fillStyle = "white";
+      this.ctx.textAlign = "center";
       this.ctx.font = "16px 'KenVector Future'";
   }
 
@@ -46,7 +47,7 @@
       scoreString = "0" + scoreString;
     }
 
-    this.ctx.fillText(scoreString, Game.DIM_X - this.ctx.measureText(scoreString).width - 10, 26);
+    this.ctx.fillText(scoreString, Game.DIM_X - (this.ctx.measureText(scoreString).width / 2) - 10, 26);
   };
 
   Game.prototype.drawGameOver = function () {
